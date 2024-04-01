@@ -37,6 +37,7 @@ public class Cuarto {
     public Cuarto(String descripcion, TipoSalida direccion, Cuarto cuarto) {
         this.descripcion = descripcion;
         this.salidas = new Salida();
+        salidas.setSalida(direccion, cuarto);
     }
 
     public Cuarto(String description) {
@@ -94,6 +95,6 @@ public class Cuarto {
     // la descripcion del cuarto
     private String descripcion;
     // las salidas del cuarto
-    Salida salidas;
-
+    private Salida salidas;
+    private Item objetosDelCuarto;
 }

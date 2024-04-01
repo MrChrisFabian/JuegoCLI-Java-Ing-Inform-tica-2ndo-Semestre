@@ -2,9 +2,6 @@ import java.util.*;
 import java.util.Set;
 
 public class Salida {
-    private TipoSalida direccion;
-    private Cuarto cuarto;
-    private HashMap<TipoSalida, Cuarto> salida = new HashMap<TipoSalida, Cuarto>();
 
     /**
      * The Constructor for the class Salida
@@ -53,4 +50,8 @@ public class Salida {
     public void setSalida(TipoSalida direccion, Cuarto cuarto) {
         salida.put(direccion, cuarto);
     }
+
+    private TipoSalida direccion;
+    private Cuarto cuarto;
+    private HashMap<TipoSalida, Cuarto> salida = new HashMap<TipoSalida, Cuarto>();
 }

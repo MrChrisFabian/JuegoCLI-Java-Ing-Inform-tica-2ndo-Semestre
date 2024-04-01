@@ -11,6 +11,8 @@
  *
  */
 
+import java.util.EnumSet;
+
 /**
  * Esta clase es la principal para la aplicacion "Zork". Zork es un juego de
  * aventuras, simple, y basado en texto.
@@ -44,7 +46,6 @@ class Juego {
      * Crea todas las habitaciones y enlaza todas sus salidas
      */
     private void crearCuartos() {
-
         // crear los cuartos
         Cuarto afuera = new Cuarto("En el Salón Rojo...");
         Cuarto sum = new Cuarto("la Sala de Uso Multiple (SUM)", TipoSalida.ESTE, afuera);
@@ -107,7 +108,9 @@ class Juego {
         }
 
         // Intenta salir del cuarto
-        direccionEntrada = TipoSalida.valueOf(direccion);
+        if (existInTipoSalida(direccion)) {
+            direccionEntrada = TipoSalida.valueOf(direccion);
+        }
         Cuarto siguienteCuarto = cuartoActual.siguienteCuarto(direccion);
 
         if (null == siguienteCuarto) {
@@ -164,6 +167,16 @@ class Juego {
      */
     public TipoSalida getUltimoCuarto() {
         return direccionEntrada;
+    }
+
+    private boolean existInTipoSalida(String elemento) {
+        boolean existe = false;
+        for (TipoSalida salida : TipoSalida.values()) {
+            if (salida.name().equals(elemento)) {
+                existe = true;
+            }
+        }
+        return existe;
     }
 
     private TipoSalida direccionEntrada;
