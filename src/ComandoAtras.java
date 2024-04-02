@@ -26,8 +26,6 @@ public class ComandoAtras extends ComandoAbstracto {
                 juego.irA("ARRIBA");
 
                 break;
-            default:
-                break;
         }
         return true;
     }

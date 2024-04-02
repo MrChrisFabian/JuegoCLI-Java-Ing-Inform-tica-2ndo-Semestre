@@ -55,7 +55,7 @@ public class Parser {
         String palabra2 = null;
 
         System.out.print("> "); // print prompt
-        //Como obtenemos lo ingresado por el usuario a la terminal...
+        // Como obtenemos lo ingresado por el usuario a la terminal...
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         try {
             // Guardamos lo ingresado como un string
@@ -91,4 +91,5 @@ public class Parser {
     private FabricaDeComandos fabricaDeComandos;
 }
 
-// Recuperamos la información ingresada por el Usuario la desglosamos en dos palabras que se pasan al objeto de fabrica de comandos para ser utilizados
+// Recuperamos la información ingresada por el Usuario la desglosamos en dos
+// palabras que se pasan al objeto de fabrica de comandos para ser utilizados

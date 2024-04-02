@@ -42,6 +42,7 @@ public class FabricaDeComandos {
         this.comandosConocidos.put(AYUDA, new ComandoAyuda());
         this.comandosConocidos.put(SALIR, new ComandoSalir());
         this.comandosConocidos.put(ATRAS, new ComandoAtras());
+        this.comandosConocidos.put(GUARDAR, new ComandoGuardar());
     }
 
     /**
@@ -102,6 +103,7 @@ public class FabricaDeComandos {
     private static final String SALIR = "salir";
     private static final String AYUDA = "ayuda";
     private static final String ATRAS = "atras";
+    private static final String GUARDAR = "guardar";
 
     // aqui pondremos los comandos que conocemos
     private final Map comandosConocidos = new HashMap();

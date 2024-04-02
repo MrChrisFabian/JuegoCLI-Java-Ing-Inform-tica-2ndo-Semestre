@@ -7,11 +7,9 @@
  * Date: March 2000
  * Copyright (c) Michael Kolling
  *
- * Nombre del Alumno:
+ * Nombre del Alumno: Christopher Fabián Mendoza López
  *
  */
-
-import java.util.EnumSet;
 
 /**
  * Esta clase es la principal para la aplicacion "Zork". Zork es un juego de
@@ -33,12 +31,14 @@ class Juego {
 
     private Parser parser;
     private Cuarto cuartoActual;
+    private Jugador jugador;
 
     /**
      * Crea el juego e inicializa su mapa interno
      */
     public Juego() {
         crearCuartos();
+        jugador = new Jugador();
         parser = new Parser();
     }
 
@@ -48,16 +48,11 @@ class Juego {
     private void crearCuartos() {
         // crear los cuartos
         Cuarto afuera = new Cuarto("En el Salón Rojo...");
-        Cuarto sum = new Cuarto("la Sala de Uso Multiple (SUM)", TipoSalida.ESTE, afuera);
-        Cuarto facea = new Cuarto("el pabellón de FACEA", TipoSalida.NORTE, sum);
-        Cuarto rectorado = new Cuarto("el pabellón del Rectorado", TipoSalida.OESTE, facea);
-        Cuarto humanidades = new Cuarto("el pabellón de Humanidades", TipoSalida.NORTE, rectorado);
-        Cuarto Dama = new Cuarto("Cuarto donde se encuentra algo o alguien...", TipoSalida.SUR, humanidades);
+        Cuarto sum = new Cuarto("la Sala de Uso Multiple (SUM)", TipoSalida.ESTE, afuera, new Item("Hacha", 20));
+        Cuarto facea = new Cuarto("el pabellón de FACEA", TipoSalida.NORTE, sum, new Item("Caramelo", 2));
         // inicializar las salidas
-        afuera.setSalidas(TipoSalida.SUR, sum);
-        afuera.setSalidas(TipoSalida.ARRIBA, facea);
-        facea.setSalidas(TipoSalida.ABAJO, afuera);
-        sum.setSalidas(TipoSalida.NORTE, afuera);
+        afuera.setSalidas(TipoSalida.ESTE, facea);
+        afuera.setObjetosDelCuarto(new Item("Juguete", 1));
         // empezar juego afuera
         cuartoActual = afuera;
     }
@@ -148,6 +143,15 @@ class Juego {
      */
     public void imprimirCont(String mensaje) {
         textEffecto(mensaje);
+    }
+
+    /**
+     * Method that returns the current room
+     * 
+     * @return
+     */
+    public Cuarto getCuartoActual() {
+        return cuartoActual;
     }
 
     // Effect in the way that we write in the console

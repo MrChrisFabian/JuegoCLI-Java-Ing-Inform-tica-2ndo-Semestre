@@ -32,14 +32,23 @@ public class Cuarto {
     /**
      * Crea una habitacion descrita como "descripcion". Inicialmente, esta no
      * existe. "descripcion" es alguna cosa como "una cocina" o "la sala de
-     * descanso"
+     * descanso" pero también Incluye un objeto que se encuentra en la habitación,
+     * una dirección y un cuarto que seran su salida
      */
-    public Cuarto(String descripcion, TipoSalida direccion, Cuarto cuarto) {
+    public Cuarto(String descripcion, TipoSalida direccion, Cuarto cuarto, Item objetoDelCuarto) {
         this.descripcion = descripcion;
         this.salidas = new Salida();
         salidas.setSalida(direccion, cuarto);
+        this.objetosDelCuarto.add(objetoDelCuarto);
     }
 
+    /**
+     * Crea una habitacion descrita como "descripcion". Inicialmente, esta no
+     * existe. "descripcion" es alguna cosa como "una cocina" o "la sala de
+     * descanso"
+     * 
+     * @param description
+     */
     public Cuarto(String description) {
         this.descripcion = description;
         this.salidas = new Salida();
@@ -70,7 +79,8 @@ public class Cuarto {
      * en ${cuarto}. Salidas: {salidas que existen}.
      */
     public String descripcionLarga() {
-        return "Tu estas en " + descripcion + ".\n" + salidas.getTodasSalidasDeCuarto().toString();
+        return "Tu estas en " + descripcion + ".\n" + salidas.getTodasSalidasDeCuarto().toString() + ".\n"
+                + ".\n";
     }
 
     /**
@@ -86,15 +96,38 @@ public class Cuarto {
     }
 
     /**
-     * Give every exit with have in a room
+     * Returns every direction that the room has
      */
     public Set<TipoSalida> getSalidasDeCuarto() {
         return salidas.getTodasSalidasDeCuarto();
     }
 
+    /**
+     * Returns the items in the room
+     */
+    public ArrayList<Item> getObjetosDelCuarto() {
+        return objetosDelCuarto;
+    }
+
+    /**
+     * Set a items in the room
+     * 
+     */
+    public void setObjetosDelCuarto(Item objeto) {
+        objetosDelCuarto.add(objeto);
+    }
+
+    // public String mostrarElementosString() {
+    //     String mensaje = "Los Elementos de la habitacion son: \n";
+    //     for (Item i : objetosDelCuarto) {
+            
+    //     }
+    // }
+
     // la descripcion del cuarto
     private String descripcion;
     // las salidas del cuarto
     private Salida salidas;
-    private Item objetosDelCuarto;
+    private ArrayList<Item> objetosDelCuarto = new ArrayList<Item>();
+    
 }
