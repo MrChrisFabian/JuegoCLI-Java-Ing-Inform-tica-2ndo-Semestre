@@ -7,28 +7,12 @@ public class Inventario {
     }
 
     /**
-     * Agrega un item al inventario si hay espacio
-     * 
-     * @param objeto
-     * @return
-     */
-    public boolean AddElement(Item objeto) {
-        if (checkEspacio(objeto)) {
-            inventario.add(objeto);
-            pesoActual += objeto.getPeso();
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
      * Mostramos todos los elementos del inventario
      * 
      * @return
      */
     public String mostrarElementos() {
-        String mensaje = "Los Elementos de su inventario son: \n";
+        String mensaje = "";
         for (Item i : inventario) {
             mensaje += "[ ";
             mensaje += "Nombre:" + i.getNombre() + "\n";
@@ -44,14 +28,46 @@ public class Inventario {
      */
     public boolean removerElemento(String nombre) {
         boolean completado = false;
+        Item itemEliminarAux = new Item("Handler", 0);
+        if (getItem(nombre) != null) {
+            pesoActual -= getItem(nombre).getPeso();
+            completado = true;
+            itemEliminarAux = getItem(nombre);
+        }
+
+        inventario.remove(itemEliminarAux);
+        return completado;
+    }
+
+    /**
+     * Agrega un item al inventario si hay espacio
+     * 
+     * @param objeto
+     * @return
+     */
+    public boolean AddElement(Item objeto) {
+        if (checkEspacio(objeto)) {
+            inventario.add(objeto);
+            pesoActual += objeto.getPeso();
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Metodo que retorna un item por su nombre
+     * 
+     * @param nombre
+     * @return
+     */
+
+    public Item getItem(String nombre) {
         for (Item i : inventario) {
             if (i.getNombre().equals(nombre)) {
-                pesoActual -= i.getPeso();
-                inventario.remove(i);
-                completado = true;
+                return i;
             }
         }
-        return completado;
+        return null;
     }
 
     /**

@@ -39,7 +39,8 @@ public class Cuarto {
         this.descripcion = descripcion;
         this.salidas = new Salida();
         salidas.setSalida(direccion, cuarto);
-        this.objetosDelCuarto.add(objetoDelCuarto);
+        itemsDelCuarto = new Inventario(200);
+        itemsDelCuarto.AddElement(objetoDelCuarto);
     }
 
     /**
@@ -80,7 +81,7 @@ public class Cuarto {
      */
     public String descripcionLarga() {
         return "Tu estas en " + descripcion + ".\n" + salidas.getTodasSalidasDeCuarto().toString() + ".\n"
-                + ".\n";
+                + getObjetosDelCuarto();
     }
 
     /**
@@ -103,31 +104,42 @@ public class Cuarto {
     }
 
     /**
-     * Returns the items in the room
+     * Returns the items in the room as a String
      */
-    public ArrayList<Item> getObjetosDelCuarto() {
-        return objetosDelCuarto;
+    public String getObjetosDelCuarto() {
+        return itemsDelCuarto.mostrarElementos();
     }
 
     /**
-     * Set a items in the room
+     * Set a item in the room
      * 
      */
-    public void setObjetosDelCuarto(Item objeto) {
-        objetosDelCuarto.add(objeto);
+    public boolean setObjetoDelCuarto(Item objeto) {
+        return itemsDelCuarto.AddElement(objeto);
     }
 
-    // public String mostrarElementosString() {
-    //     String mensaje = "Los Elementos de la habitacion son: \n";
-    //     for (Item i : objetosDelCuarto) {
-            
-    //     }
-    // }
+    /**
+     * Return a item by his name
+     * 
+     * @param nombre
+     * @return
+     */
+    public Item getObjetoDelCuarto(String nombre) {
+        return itemsDelCuarto.getItem(nombre);
+    }
+
+    /**
+     * Remove a item from the room by his name
+     */
+    public boolean removerObjetoDelCuarto(String nombre) {
+        return itemsDelCuarto.removerElemento(nombre);
+    }
 
     // la descripcion del cuarto
     private String descripcion;
     // las salidas del cuarto
     private Salida salidas;
-    private ArrayList<Item> objetosDelCuarto = new ArrayList<Item>();
-    
+    // Como Almacenamso los Items de un Cuarto
+    private Inventario itemsDelCuarto;
+
 }

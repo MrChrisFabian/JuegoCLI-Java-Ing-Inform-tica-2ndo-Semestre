@@ -48,13 +48,13 @@ class Juego {
     private void crearCuartos() {
         // crear los cuartos
         Cuarto afuera = new Cuarto("En el Salón Rojo...");
-        Cuarto sum = new Cuarto("la Sala de Uso Multiple (SUM)", TipoSalida.ESTE, afuera, new Item("Hacha", 20));
-        Cuarto facea = new Cuarto("el pabellón de FACEA", TipoSalida.NORTE, sum, new Item("Caramelo", 2));
+        Cuarto sum = new Cuarto("la Sala de Uso Multiple (SUM)", TipoSalida.ESTE, afuera, new Item("Hacha", 2));
+        Cuarto baño = new Cuarto("Aca te podes Bañar", TipoSalida.ABAJO, sum, new Item("Toalla", 1));
         // inicializar las salidas
-        afuera.setSalidas(TipoSalida.ESTE, facea);
-        afuera.setObjetosDelCuarto(new Item("Juguete", 1));
-        // empezar juego afuera
-        cuartoActual = afuera;
+        sum.setSalidas(TipoSalida.NORTE, afuera);
+        afuera.setSalidas(TipoSalida.SUR, sum);
+        sum.setSalidas(TipoSalida.ARRIBA, baño);
+        cuartoActual = sum;
     }
 
     /**
@@ -154,6 +154,45 @@ class Juego {
         return cuartoActual;
     }
 
+    /**
+     * Agregamos un item al jugador
+     * 
+     * @param mensaje
+     */
+    public boolean agregarItemJugador(String item) {
+        return jugador.agregarItem(cuartoActual.getObjetoDelCuarto(item));
+    }
+
+    /**
+     * Method that remove a item from the player and if was possible return
+     * 
+     * @param elemento
+     * @return
+     */
+    public boolean removerItemJugador(String elemento) {
+        return jugador.removerItemJugador(jugador.getItem(elemento));
+    }
+
+    /**
+     * Method that returns all the items of the player
+     * 
+     * @return
+     */
+
+    public String itemsJugadorString() {
+        return jugador.getInventarioJugador();
+    }
+
+    /**
+     * Method that returns the items of the player
+     * 
+     * @return
+     */
+
+    public Item getItemJugador(String item) {
+        return jugador.getItem(item);
+    }
+
     // Effect in the way that we write in the console
     private void textEffecto(String mensaje) {
         for (int i = 0; i <= mensaje.length(); i++) {
@@ -173,6 +212,33 @@ class Juego {
         return direccionEntrada;
     }
 
+    /**
+     * Method that remove a item from the current room and if was possible return
+     * true
+     *
+     * @param item
+     * @return
+     */
+    public boolean removerItemCuarto(String item) {
+        return cuartoActual.removerObjetoDelCuarto(item);
+    }
+
+    /**
+     * Method that add a item to the current room
+     * 
+     * @param elemento
+     * @return
+     */
+    public boolean addItemCuarto(Item elemento) {
+        return cuartoActual.setObjetoDelCuarto(elemento);
+    }
+
+    /**
+     * Metodo que devuelve si existe en el enum TipoSalida
+     * 
+     * @param elemento
+     * @return
+     */
     private boolean existInTipoSalida(String elemento) {
         boolean existe = false;
         for (TipoSalida salida : TipoSalida.values()) {
@@ -183,5 +249,7 @@ class Juego {
         return existe;
     }
 
+    // Objeto donde Guardamos las direcciones
     private TipoSalida direccionEntrada;
+
 }
