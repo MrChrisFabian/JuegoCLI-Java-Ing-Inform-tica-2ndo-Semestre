@@ -1,3 +1,4 @@
+package utils;
 public class Jugador {
     public Jugador() {
         this.inventario = new Inventario(10);

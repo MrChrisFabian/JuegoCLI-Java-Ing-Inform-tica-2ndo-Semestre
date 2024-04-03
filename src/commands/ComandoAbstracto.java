@@ -1,3 +1,4 @@
+package commands;
 /*
  * Universidad Nacional de Itapua.
  * Proyecto Zork.

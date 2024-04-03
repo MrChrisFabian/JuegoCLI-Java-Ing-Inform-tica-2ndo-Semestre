@@ -1,3 +1,4 @@
+package utils;
 /*
  * Universidad Nacional de Itapua.
  * Proyecto Zork.

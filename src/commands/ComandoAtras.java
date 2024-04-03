@@ -1,3 +1,8 @@
+package commands;
+
+import dist.Juego;
+import utils.TipoSalida;
+
 public class ComandoAtras extends ComandoAbstracto {
     public boolean ejecutar(Juego juego) {
         // Buscar la direccion que coincida con getUltimoCuarto

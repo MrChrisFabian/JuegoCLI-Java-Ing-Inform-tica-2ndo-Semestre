@@ -1,3 +1,4 @@
+package dist;
 /*
  * Universidad Nacional de Itapua.
  * Proyecto Zork.
@@ -10,6 +11,13 @@
  * Nombre del Alumno: Christopher Fabián Mendoza López
  *
  */
+
+import commands.Comando;
+import commands.Parser;
+import utils.Cuarto;
+import utils.Item;
+import utils.Jugador;
+import utils.TipoSalida;
 
 /**
  * Esta clase es la principal para la aplicacion "Zork". Zork es un juego de
@@ -27,7 +35,7 @@
  * juego. Tambien evalua los comandos que devuelve el parser.
  */
 
-class Juego {
+public class Juego {
 
     private Parser parser;
     private Cuarto cuartoActual;

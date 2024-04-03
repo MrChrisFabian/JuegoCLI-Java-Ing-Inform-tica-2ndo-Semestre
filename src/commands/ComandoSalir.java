@@ -1,3 +1,4 @@
+package commands;
 /*
  * Universidad Nacional de Itapua.
  * Proyecto Zork.
@@ -10,6 +11,8 @@
  * Nombre del Alumno:
  *
  */
+
+import dist.Juego;
 
 /**
  * Este comando termina el juego.

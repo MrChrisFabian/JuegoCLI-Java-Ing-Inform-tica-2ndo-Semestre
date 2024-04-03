@@ -1,3 +1,4 @@
+package utils;
 
 public class Item {
     public Item(String nombre, int peso) {

@@ -1,3 +1,4 @@
+package commands;
 /*
  * Universidad Nacional de Itapua.
  * Proyecto Zork.
@@ -10,6 +11,8 @@
  * Nombre del Alumno: Christopher Fabián Mendoza López
  *
  */
+
+import dist.Juego;
 
 /**
  * Esta clase es un comando que cambia el cuarto actual del protagonista

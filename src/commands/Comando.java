@@ -1,3 +1,4 @@
+package commands;
 /*
  * Universidad Nacional de Itapua.
  * Proyecto Zork.
@@ -12,6 +13,8 @@
  */
 
 import java.util.*;
+
+import dist.Juego;
 
 /**
  * Esta interface representa el comando emitido por el usuario.

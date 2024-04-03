@@ -1,3 +1,7 @@
+package commands;
+
+import dist.Juego;
+
 public class ComandoDejar extends ComandoAbstracto {
     public boolean ejecutar(Juego juego) {
         if (getPalabras().size() < 2) {

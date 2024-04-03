@@ -1,3 +1,4 @@
+package commands;
 /*
  * Universidad Nacional de Itapua.
  * Proyecto Zork.
@@ -11,7 +12,9 @@
  *
  */
 
-import java.util.*;
+import dist.Juego;
+import java.util.Collection;
+import java.util.Iterator;
 
 /**
  * Esta clase implementa la ayuda para el juego Zork

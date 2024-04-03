@@ -1,3 +1,4 @@
+package commands;
 /*
  * Universidad Nacional de Itapua.
  * Proyecto Zork.
@@ -10,6 +11,8 @@
  * Nombre del Alumno:
  *
  */
+
+import dist.Juego;
 
 /**
  * Este comando es utilizado cuando el sistema no reconoce el comando pedido

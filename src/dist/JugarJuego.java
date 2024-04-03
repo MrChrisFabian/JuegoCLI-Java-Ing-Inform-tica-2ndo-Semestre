@@ -1,3 +1,4 @@
+package dist;
 /*
  * Universidad Nacional de Itapua.
  * Proyecto Zork.
