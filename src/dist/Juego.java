@@ -78,7 +78,7 @@ public class Juego {
             Comando comando = parser.getComando();
             continuar = comando.ejecutar(this);
         }
-        System.out.println("Gracias Por Jugar...El Overlook siempre lo espera...");
+        imprimir("Gracias Por Jugar...El Overlook siempre lo espera...");
     }
 
     /**
@@ -205,7 +205,7 @@ public class Juego {
     private void textEffecto(String mensaje) {
         for (int i = 0; i <= mensaje.length(); i++) {
             try {
-                Thread.sleep(15);
+                Thread.sleep(10);
                 System.out.print(mensaje.charAt(i));
             } catch (Exception e) {
 
