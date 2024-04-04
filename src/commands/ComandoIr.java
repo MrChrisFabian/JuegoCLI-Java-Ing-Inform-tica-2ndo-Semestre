@@ -27,7 +27,7 @@ public class ComandoIr extends ComandoAbstracto {
      */
     public boolean ejecutar(Juego juego) {
         // Revisa si
-        if (getPalabras().size() < 2) {
+        if (getPalabras().keySet().size() < 2) {
             throw new IllegalArgumentException("Faltan palabras");
         }
         String direccion = (String) getPalabras().get("parametro");

@@ -1,4 +1,4 @@
-package utils;
+package characters;
 
 /**
  * The Personaje Class represents a Characther in the Game, that only has a name
@@ -7,9 +7,9 @@ package utils;
  */
 
 public class Personaje {
-    public Personaje(String nombre, String[] Dialogos) {
+    public Personaje(String nombre, String[] dialogos) {
         this.nombre = nombre;
-        this.Dialogos = Dialogos;
+        this.dialogos = dialogos;
     }
 
     /**
@@ -28,10 +28,10 @@ public class Personaje {
      */
 
     public String getRandomDialogo() {
-        return Dialogos[(int) (Math.random() * Dialogos.length)];
+        return dialogos[(int) (Math.random() * dialogos.length)];
     }
 
     private final String nombre;
-    private final String[] Dialogos;
+    private final String[] dialogos;
 
 }

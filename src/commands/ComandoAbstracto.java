@@ -44,7 +44,7 @@ public abstract class ComandoAbstracto implements Comando, Cloneable {
      * Hashmap con "ir" y "norte"
      *
      */
-    public HashMap getPalabras() {
+    public HashMap<String, String> getPalabras() {
         if (null == this.palabras || this.palabras.size() < 1) {
             throw new IllegalStateException(
                     "Palabras no inicializadas correctamente");

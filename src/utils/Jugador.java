@@ -1,4 +1,5 @@
 package utils;
+
 public class Jugador {
     public Jugador() {
         this.inventario = new Inventario(10);
@@ -18,6 +19,10 @@ public class Jugador {
 
     public boolean removerItemJugador(Item item) {
         return inventario.removerElemento(item.getNombre());
+    }
+
+    public int getEspacio() {
+        return inventario.getPesoActual();
     }
 
     Inventario inventario;

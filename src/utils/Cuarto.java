@@ -14,6 +14,9 @@ package utils;
 
 import java.util.*;
 
+import characters.Personaje;
+import characters.PersonajeControl;
+
 /**
  *
  * Un cuarto representa una ubicacion en el escenario del juego. Aunque se llama
@@ -36,12 +39,15 @@ public class Cuarto {
      * descanso" pero también Incluye un objeto que se encuentra en la habitación,
      * una dirección y un cuarto que seran su salida
      */
-    public Cuarto(String descripcion, TipoSalida direccion, Cuarto cuarto, Item objetoDelCuarto) {
+    public Cuarto(String descripcion, TipoSalida direccionDeSalida, Cuarto cuarto, Item objetoDelCuarto,
+            Personaje personaje) {
         this.descripcion = descripcion;
         this.salidas = new Salida();
-        salidas.setSalida(direccion, cuarto);
+        salidas.setSalida(direccionDeSalida, cuarto);
         itemsDelCuarto = new Inventario(200);
         itemsDelCuarto.AddElement(objetoDelCuarto);
+        this.personajeControl = new PersonajeControl();
+        personajeControl.addPersonaje(personaje);
     }
 
     /**
@@ -54,6 +60,8 @@ public class Cuarto {
     public Cuarto(String description) {
         this.descripcion = description;
         this.salidas = new Salida();
+        this.itemsDelCuarto = new Inventario(200);
+        this.personajeControl = new PersonajeControl();
     }
 
     /**
@@ -81,8 +89,10 @@ public class Cuarto {
      * en ${cuarto}. Salidas: {salidas que existen}.
      */
     public String descripcionLarga() {
-        return "Tu estas en " + descripcion + ".\n" + salidas.getTodasSalidasDeCuarto().toString() + ".\n"
-                + getObjetosDelCuarto();
+        return "Tu estas en " + descripcion + ".\nLas Direcciones disponibles son:"
+                + salidas.getTodasSalidasDeCuarto().toString() + ".\n" + "Los Personajes en el cuarto son: "
+                + personajeControl.getPersonajesNombres() + "\n" +
+                "Los objetos en el cuarto son:" + getObjetosDelCuartoString();
     }
 
     /**
@@ -107,7 +117,7 @@ public class Cuarto {
     /**
      * Returns the items in the room as a String
      */
-    public String getObjetosDelCuarto() {
+    public String getObjetosDelCuartoString() {
         return itemsDelCuarto.mostrarElementos();
     }
 
@@ -136,11 +146,30 @@ public class Cuarto {
         return itemsDelCuarto.removerElemento(nombre);
     }
 
+    /**
+     * Agregar un personaje al cuarto
+     * 
+     * @param nombre
+     * @return
+     */
+    public void addPersonaje(Personaje personaje) {
+        personajeControl.addPersonaje(personaje);
+    }
+
+    /**
+     * Method that return a personaje Dialog by his name
+     */
+    public String getDialogoPersonaje(String nombre) {
+        return personajeControl.getPersonaje(nombre).getRandomDialogo();
+    }
+
     // la descripcion del cuarto
     private String descripcion;
     // las salidas del cuarto
     private Salida salidas;
-    // Como Almacenamso los Items de un Cuarto
+    // Como Almacenamos los Items de un Cuarto
     private Inventario itemsDelCuarto;
+    // Creamos el objeto que controlara a todos los personajes del Cuarto
+    private PersonajeControl personajeControl;
 
 }

@@ -4,8 +4,9 @@ import dist.Juego;
 
 public class ComandoDejar extends ComandoAbstracto {
     public boolean ejecutar(Juego juego) {
-        if (getPalabras().size() < 2) {
-            throw new IllegalArgumentException("Faltan palabras");
+        if (getPalabras().get("parametro") == null) {
+            juego.imprimir("No se ha especificado el item a dejar");
+            return true;
         }
         String itemName = (String) getPalabras().get("parametro");
         juego.addItemCuarto(juego.getItemJugador(itemName));

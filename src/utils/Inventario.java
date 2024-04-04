@@ -1,4 +1,5 @@
 package utils;
+
 import java.util.ArrayList;
 
 public class Inventario {
@@ -13,12 +14,12 @@ public class Inventario {
      * @return
      */
     public String mostrarElementos() {
-        String mensaje = "";
+        String mensaje = " ";
         for (Item i : inventario) {
-            mensaje += "[ ";
-            mensaje += "Nombre:" + i.getNombre() + "\n";
+            mensaje += "\n[";
+            mensaje += "Nombre:" + i.getNombre() + ",";
             mensaje += "Peso:" + i.getPeso();
-            mensaje += "]  " + "\n";
+            mensaje += "]";
         }
         return mensaje;
     }
@@ -78,7 +79,14 @@ public class Inventario {
      * @return
      */
     private boolean checkEspacio(Item objeto) {
-        return ((objeto.getPeso() + pesoActual) < pesoMax);
+        return ((objeto.getPeso() + pesoActual) <= pesoMax);
+    }
+
+    /**
+     * Meotodo que retorna el peso actual del inventario
+     */
+    public int getPesoActual() {
+        return pesoActual;
     }
 
     private ArrayList<Item> inventario;

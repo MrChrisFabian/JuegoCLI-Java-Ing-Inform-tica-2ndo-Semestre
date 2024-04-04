@@ -29,7 +29,6 @@ public class ComandoAtras extends ComandoAbstracto {
                 break;
             case TipoSalida.ABAJO:
                 juego.irA("ARRIBA");
-
                 break;
         }
         return true;

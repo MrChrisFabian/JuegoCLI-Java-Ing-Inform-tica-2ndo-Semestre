@@ -12,6 +12,7 @@ package dist;
  *
  */
 
+import characters.Personaje;
 import commands.Comando;
 import commands.Parser;
 import utils.Cuarto;
@@ -55,14 +56,134 @@ public class Juego {
      */
     private void crearCuartos() {
         // crear los cuartos
-        Cuarto afuera = new Cuarto("En el Salón Rojo...");
-        Cuarto sum = new Cuarto("la Sala de Uso Multiple (SUM)", TipoSalida.ESTE, afuera, new Item("Hacha", 2));
-        Cuarto baño = new Cuarto("Aca te podes Bañar", TipoSalida.ABAJO, sum, new Item("Toalla", 1));
+        // Patio
+        Cuarto patio = new Cuarto("Patio del Overlook");
+        Cuarto patioDeJuegos = new Cuarto("Patio de Juegos especial para los niños!");
+        Cuarto estacionamiento = new Cuarto("Estacionamiento del Hotel");
+        // Planta Baja
+        Cuarto vestibulo = new Cuarto("Vestibulo del Overlook");
+        Cuarto salon = new Cuarto("Salón del Overlook con imponentes ventanales al frio invierno");
+        Cuarto salonRojo = new Cuarto("Estas en el Salón Rojo... La muerte Roja se acerca...");
+        Cuarto ascensorPB = new Cuarto("Ascensor...Planta Baja");
+        // Primer Piso
+        Cuarto ascensorPP = new Cuarto("Ascensor...Primer Piso");
+        Cuarto pasilloPP = new Cuarto("Pasillo del Primer Piso");
+        Cuarto SuitePresidencial = new Cuarto("Una elegante y exclusiva Habitación...La Suite Presidencial");
+        Cuarto DogmanCuarto = new Cuarto("Este cuarto parece no estar ocupado, pero la puerta estaba abierta...");
+        Cuarto pasillo217 = new Cuarto("Estas frente a la habitación 217...");
+        Cuarto habitacion217 = new Cuarto("Expedición al interior de la Habitación 217...");
+        Cuarto baño217 = new Cuarto("Baño de la habitación 217...");
+        // Sub Suelo (Sotano)
+        Cuarto ascensorSS = new Cuarto("Ascensor...Sub Suelo");
+        Cuarto pasilloSS = new Cuarto("Estas en SubSuelo, un lugar oscuro y frio...");
+        Cuarto habitaciónServicio = new Cuarto("Las habitaciones de la Familia Torrance");
+        Cuarto Cocina = new Cuarto("La Gran Cocina del Hotel");
+        Cuarto despensa = new Cuarto("Despensa del Hotel");
+        Cuarto calderas = new Cuarto("Calderas del Hotel");
         // inicializar las salidas
-        sum.setSalidas(TipoSalida.NORTE, afuera);
-        afuera.setSalidas(TipoSalida.SUR, sum);
-        sum.setSalidas(TipoSalida.ARRIBA, baño);
-        cuartoActual = sum;
+        // Patio
+        patio.setSalidas(TipoSalida.NORTE, vestibulo);
+        patio.setSalidas(TipoSalida.OESTE, patioDeJuegos);
+        patio.setSalidas(TipoSalida.SUR, estacionamiento);
+        // Patio de Juegos
+        patioDeJuegos.setSalidas(TipoSalida.ESTE, patio);
+        // Estacionamiento
+        estacionamiento.setSalidas(TipoSalida.NORTE, patio);
+        // vestibulo
+        vestibulo.setSalidas(TipoSalida.SUR, patio);
+        vestibulo.setSalidas(TipoSalida.OESTE, salonRojo);
+        vestibulo.setSalidas(TipoSalida.ESTE, salon);
+        vestibulo.setSalidas(TipoSalida.NORTE, ascensorPB);
+        // salonRojo
+        salonRojo.setSalidas(TipoSalida.ESTE, vestibulo);
+        // salon
+        salon.setSalidas(TipoSalida.OESTE, vestibulo);
+        // ascensorPB
+        ascensorPB.setSalidas(TipoSalida.SUR, vestibulo);
+        ascensorPB.setSalidas(TipoSalida.ARRIBA, ascensorPP);
+        ascensorPB.setSalidas(TipoSalida.ABAJO, ascensorSS);
+        // ascensorPP
+        ascensorPP.setSalidas(TipoSalida.ABAJO, ascensorPB);
+        ascensorPP.setSalidas(TipoSalida.SUR, pasilloPP);
+        // pasillo
+        pasilloPP.setSalidas(TipoSalida.NORTE, ascensorPP);
+        pasilloPP.setSalidas(TipoSalida.OESTE, SuitePresidencial);
+        pasilloPP.setSalidas(TipoSalida.ESTE, pasillo217);
+        // SuitePresidencial
+        SuitePresidencial.setSalidas(TipoSalida.ESTE, pasilloPP);
+        // pasillo217
+        pasillo217.setSalidas(TipoSalida.OESTE, pasilloPP);
+        pasillo217.setSalidas(TipoSalida.ESTE, DogmanCuarto);
+        pasillo217.setSalidas(TipoSalida.SUR, habitacion217);
+        // habitacion217
+        habitacion217.setSalidas(TipoSalida.NORTE, pasillo217);
+        habitacion217.setSalidas(TipoSalida.ESTE, baño217);
+        // baño217
+        baño217.setSalidas(TipoSalida.OESTE, habitacion217);
+        // DogmanCuarto
+        DogmanCuarto.setSalidas(TipoSalida.OESTE, pasillo217);
+        // ascensorSS
+        ascensorSS.setSalidas(TipoSalida.ARRIBA, ascensorPB);
+        ascensorSS.setSalidas(TipoSalida.SUR, pasilloSS);
+        // pasilloSS
+        pasilloSS.setSalidas(TipoSalida.NORTE, ascensorSS);
+        pasilloSS.setSalidas(TipoSalida.OESTE, habitaciónServicio);
+        pasilloSS.setSalidas(TipoSalida.ESTE, Cocina);
+        pasilloSS.setSalidas(TipoSalida.SUR, calderas);
+        // habitaciónServicio
+        habitaciónServicio.setSalidas(TipoSalida.ESTE, pasilloSS);
+        // Cocina
+        Cocina.setSalidas(TipoSalida.OESTE, pasilloSS);
+        Cocina.setSalidas(TipoSalida.NORTE, despensa);
+        // despensa
+        despensa.setSalidas(TipoSalida.SUR, Cocina);
+        // calderas
+        calderas.setSalidas(TipoSalida.NORTE, pasilloSS);
+        // Creamos los objetos
+        Item hacha = new Item("Hacha-de-Incendios", 50);
+        Item palo = new Item("Palo-de-Cricket", 20);
+        Item maleta = new Item("Maleta-perdida", 20);
+        Item maqEscribir = new Item("Maquina-de-Escribir", 20);
+
+        // Juguetes de Danny
+        Item Triciclo = new Item("Triciclo", 9);
+        Item pelota = new Item("Pelota", 2);
+        Item superHeroe = new Item("Juegute-de-Batman", 2);
+        Item yoyo = new Item("Yoyo", 1);
+        Item autito = new Item("Autito", 3);
+        // Comida
+        Item Gintonic = new Item("Gintonic", 1);
+        Item Flan = new Item("Flan", 1);
+
+        // Agregamos los Objetos a los cuartos
+        estacionamiento.setObjetoDelCuarto(autito);
+        estacionamiento.setObjetoDelCuarto(maleta);
+
+        patioDeJuegos.setObjetoDelCuarto(pelota);
+
+        salon.setObjetoDelCuarto(palo);
+        salon.setObjetoDelCuarto(maqEscribir);
+
+        despensa.setObjetoDelCuarto(Flan);
+        despensa.setObjetoDelCuarto(yoyo);
+
+        pasilloPP.setObjetoDelCuarto(Triciclo);
+
+        salonRojo.setObjetoDelCuarto(Gintonic);
+
+        calderas.setObjetoDelCuarto(hacha);
+
+        pasillo217.setObjetoDelCuarto(superHeroe);
+
+        // Creamos los personajes
+        Personaje halloran = new Personaje("Halloran",
+                new String[] { "Hola Doc!", "Los lugares son como las personas, algunos brillan, otros no...",
+                        "No te acerques a la habitación 217" });
+        Personaje wendy = new Personaje("Wendy",
+                new String[] { "Hola Danny, ¿Como estas?", "¿Hey Danny estas jugando con Tonny?" });
+        // Agregamos los personajes a los cuartos
+        // Establecemos donde inicia el juego
+        cuartoActual = patio;
     }
 
     /**
@@ -126,6 +247,16 @@ public class Juego {
     }
 
     /**
+     * Imprime un mensaje para el usuario, pero
+     * se queda en la misma linea.
+     *
+     * @param mensaje
+     */
+    public void imprimirCont(String mensaje) {
+        textEffecto(mensaje);
+    }
+
+    /**
      * Imprime un mensaje para el usuario
      *
      * @param mensaje
@@ -141,16 +272,6 @@ public class Juego {
      */
     public void imprimir() {
         System.out.println();
-    }
-
-    /**
-     * Imprime un mensaje para el usuario, pero
-     * se queda en la misma linea.
-     *
-     * @param mensaje
-     */
-    public void imprimirCont(String mensaje) {
-        textEffecto(mensaje);
     }
 
     /**
@@ -239,6 +360,20 @@ public class Juego {
      */
     public boolean addItemCuarto(Item elemento) {
         return cuartoActual.setObjetoDelCuarto(elemento);
+    }
+
+    /**
+     * Method that returns a dialog from a specific character
+     * 
+     * @param nombre
+     * @return
+     */
+    public String HablarCon(String nombre) {
+        return cuartoActual.getDialogoPersonaje(nombre);
+    }
+
+    public int getEspacioInventarioJugador() {
+        return jugador.getEspacio();
     }
 
     /**
