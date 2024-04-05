@@ -26,6 +26,7 @@ public class PersonajeBoss extends PersonajeEnemigo {
     public void incrementarNivel() {
         if (this.nivel <= 4) {
             this.nivel++;
+            juego.imprimir("el nivel ahora es: " + nivel);
         }
     }
 
@@ -45,8 +46,8 @@ public class PersonajeBoss extends PersonajeEnemigo {
         if (nivel == 1) {
             addDialog(dialogoNivel2a1);
             addDialog(dialogoNivel2a2);
-        } else if (nivel == 2) {
             juego.setPersonajeFueraDeEscena(personajeBueno);
+        } else if (nivel == 2) {
             juego.addDialogPersonaje(personajeBueno1, "Danny, por favor Cuidate, junta tus cosas, me quiero ir!");
         } else if (nivel == 3) {
             juego.imprimir(MensajeNivel3);

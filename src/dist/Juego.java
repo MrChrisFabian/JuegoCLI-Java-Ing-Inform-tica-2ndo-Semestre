@@ -66,7 +66,7 @@ public class Juego {
         // Patio
         Cuarto patio = new Cuarto("Patio del Overlook");
         Cuarto patioDeJuegos = new Cuarto("Patio de Juegos especial para los niños!");
-        Cuarto estacionamiento = new Cuarto("Estacionamiento del Hotel");
+        estacionamiento = new Cuarto("Estacionamiento del Hotel");
         // Planta Baja
         Cuarto vestibulo = new Cuarto("Vestibulo del Overlook");
         Cuarto salon = new Cuarto("Salón del Overlook con imponentes ventanales al frio invierno");
@@ -282,7 +282,7 @@ public class Juego {
                     "Eeeem... no puedo ir para allí... algo me esta bloqueando.");
         } else {
             // Si el Boss tiene el nivel necesario nos seguira.
-            if (getContinuePorNivel() == true) {
+            if (getNivelBoss() >= 2) {
                 cuartoActual.removePersonaje(Jack);
                 cuartoActual = siguienteCuarto;
                 if (cuartoActual.getPersonaje(Jack.getNombre()) == null) {
@@ -294,7 +294,6 @@ public class Juego {
                 imprimir(cuartoActual.descripcionLarga());
             }
         }
-        comportamientoBoss();
 
     }
 
@@ -454,6 +453,7 @@ public class Juego {
      * @param personaje
      */
     public void setPersonajeFueraDeEscena(Personaje personaje) {
+        estacionamiento.removePersonaje(personaje);
         fueraDeEscena.addPersonaje(personaje);
     }
 
@@ -492,6 +492,15 @@ public class Juego {
      */
     public void aumentarNivelBoss() {
         Jack.incrementarNivel();
+    }
+
+    /**
+     * Metodo que retorna el nivel actual del Jefe
+     * 
+     * @return
+     */
+    public int getNivelBoss() {
+        return Jack.getNivel();
     }
 
     /**
@@ -577,4 +586,6 @@ public class Juego {
     private PersonajeBoss Jack;
     // Cantidad de juguetes en la habitación objetivo
     private int cantJuguetes;
+    // Habitación en donde se encuentra un personaje a removerse
+    private Cuarto estacionamiento;
 }

@@ -14,6 +14,7 @@ public class ComandoHablar extends ComandoAbstracto {
             juego.imprimir(juego.HablarCon(nombre));
             juego.imprimir(juego.getEnemigo(nombre).Atacar());
             juego.aumentarNivelBoss();
+
         } else {
             juego.imprimir(juego.HablarCon(nombre));
         }
