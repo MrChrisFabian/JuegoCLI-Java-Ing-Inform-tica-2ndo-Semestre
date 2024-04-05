@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import dist.Juego;
 import utils.Cuarto;
 
+/**
+ * Hereda de Personaje, agrega metodo Atacar
+ */
+
 public class PersonajeEnemigo extends Personaje {
     public PersonajeEnemigo(String nombre, ArrayList<String> dialogos, Juego juego, String mensaje,
             Cuarto cuartoDondeApareces) {
@@ -14,6 +18,10 @@ public class PersonajeEnemigo extends Personaje {
         this.juego = juego;
     }
 
+    /**
+     * Metodo ataque que muestra un mensaje y mueve al Jugador
+     * @return
+     */
     public String Atacar() {
         juego.setHabitacionActual(cuartoDondeApareces);
         return mensaje;

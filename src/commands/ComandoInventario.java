@@ -2,7 +2,9 @@
 package commands;
 
 import dist.Juego;
-
+/**
+ * Comando Inventario que devuelve los objetos que poseemos en nuestro inventario
+ */
 public class ComandoInventario extends ComandoAbstracto {
     public boolean ejecutar(Juego juego) {
         if (juego.itemsJugadorString() != "") {

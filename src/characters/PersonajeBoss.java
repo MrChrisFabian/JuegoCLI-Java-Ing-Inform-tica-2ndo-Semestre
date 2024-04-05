@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import dist.Juego;
 import utils.Cuarto;
 
+/**
+ * PersonajeBoss es un tipo de Personaje especial ya que es el Jefe del juego y
+ * este hereda de los enemigos
+ */
+
 public class PersonajeBoss extends PersonajeEnemigo {
     public PersonajeBoss(String nombre, ArrayList<String> dialogos, Juego juego, String dialogoNivel2a1,
             String dialogoNivel2a2,

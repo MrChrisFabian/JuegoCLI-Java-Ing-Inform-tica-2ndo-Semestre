@@ -3,8 +3,7 @@ package characters;
 import java.util.ArrayList;
 
 /**
- * The Personaje Class represents a Characther in the Game, that only has a name
- * and a collection of dialogues
+ * La clase Personaje representa un personaje en el juego
  * 
  */
 
@@ -15,7 +14,7 @@ public class Personaje {
     }
 
     /**
-     * We return the name of the character
+     * Retorna el nombre del personaje
      * 
      * @return
      */
@@ -24,7 +23,7 @@ public class Personaje {
     }
 
     /**
-     * We return a random dialog from the array of dialogues
+     * Retornamos un dialogo aleatorio de la colección de dialogos del personaje
      * 
      * @return
      */
@@ -32,6 +31,10 @@ public class Personaje {
     public String getRandomDialogo() {
         return dialogos.get((int) (Math.random() * dialogos.size()));
     }
+    /**
+     * Agregamos un nuevo dialogo a la colección 
+     * @param newDialog
+     */
 
     public void addDialog(String newDialog) {
         dialogos.add(newDialog);

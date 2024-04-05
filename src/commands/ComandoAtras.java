@@ -2,7 +2,9 @@ package commands;
 
 import dist.Juego;
 import utils.TipoSalida;
-
+/**
+ * Atras, nos dirijimos a la dirección para salir del cuarto actual
+ */
 public class ComandoAtras extends ComandoAbstracto {
     public boolean ejecutar(Juego juego) {
         // Buscar la direccion que coincida con getUltimoCuarto

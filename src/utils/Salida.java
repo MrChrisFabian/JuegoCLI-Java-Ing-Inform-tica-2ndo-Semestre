@@ -1,15 +1,13 @@
 package utils;
+
 import java.util.*;
 import java.util.Set;
 
+/**
+ * Representa una salida que esta conectada a un cuarto
+ */
 public class Salida {
 
-    /**
-     * The Constructor for the class Salida
-     * 
-     * @param direccion
-     * @param cuarto
-     */
     public Salida(TipoSalida direccion, Cuarto cuarto) {
         this.salida = new HashMap<>();
         this.direccion = direccion;
@@ -22,18 +20,16 @@ public class Salida {
     }
 
     /**
-     * Returns a set of TipoSalida objects representing the available exits from the
-     * room.
+     * Retorna todas las salidas vinculadas a un cuarto
      *
-     * @return a set of TipoSalida objects representing the available exits from the
-     *         room
+     * @return
      */
     public Set<TipoSalida> getTodasSalidasDeCuarto() {
         return salida.keySet();
     }
 
     /**
-     * We return a Cuarto object depending of the direction we receive
+     * Retornamos el Cuarto según la salida que acabamos de recibir
      * 
      * @param direccion
      * @return
@@ -43,7 +39,7 @@ public class Salida {
     }
 
     /**
-     * We set a new value in the Salida Object that contains everything in a Hashmap
+     * Agregamos un nuevo dato donde recibimos la salida y el cuarto 
      * 
      * @param direccion
      * @param cuarto

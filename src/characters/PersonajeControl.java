@@ -1,7 +1,9 @@
 package characters;
 
 import java.util.ArrayList;
-
+    /**
+     * Clase Controladora para los clases de tipo Personaje
+     */
 public class PersonajeControl {
     public PersonajeControl() {
     }

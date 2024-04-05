@@ -232,7 +232,8 @@ public class Juego {
         imprimir();
         imprimirBienvenida();
 
-        // Jugar hasta que un comando me diga que ya no quiere jugar mas
+        // Jugar hasta que un comando me diga que ya no quiere jugar mas o el nivel del
+        // Boss sea igual a 4
         boolean continuar = true;
         while (continuar) {
             Jack.comportamiento();
@@ -243,7 +244,7 @@ public class Juego {
     }
 
     /**
-     * Imprime a la terminar el mensaje de bienvenida del jugador..
+     * Imprime a la terminal el mensaje de bienvenida del jugador..
      */
     private void imprimirBienvenida() {
         imprimir();
@@ -251,7 +252,7 @@ public class Juego {
         imprimir(
                 "Eres Danny, el Hijo de la familia Torrance que esta cuidando este invierno el majestuoso Overlook...");
         imprimir(
-                "El cual se encuentra cerrado durante el invierno, aislado en las montañas...");
+                "El cual se encuentra cerrado durante esta temporada, aislado en las montañas...");
         imprimir("Disfruta tu estadia, explora y lo más importante cuidate...");
         imprimir("Escriba 'ayuda' si necesita ayuda.");
         imprimir();
@@ -326,7 +327,7 @@ public class Juego {
     }
 
     /**
-     * Method that returns the current room
+     * Metodo que retorna la Habitación actual del juego
      * 
      * @return
      */
@@ -344,7 +345,7 @@ public class Juego {
     }
 
     /**
-     * Method that remove a item from the player and if was possible return
+     * Metodo que quita un item por su nombre del inventario del jugador
      * 
      * @param elemento
      * @return
@@ -354,7 +355,7 @@ public class Juego {
     }
 
     /**
-     * Method that returns all the items of the player
+     * Metodo que retorna todos los items del jugador en forma de String
      * 
      * @return
      */
@@ -364,7 +365,7 @@ public class Juego {
     }
 
     /**
-     * Method that returns the items of the player
+     * Metodo que retorna un item del jugador por su nombre
      * 
      * @return
      */
@@ -374,15 +375,15 @@ public class Juego {
     }
 
     /**
-     * Method that returns the value of the last room
+     * Metodo que retorna la dirección de por donde entramos al ultimo cuarto
      */
     public TipoSalida getUltimoCuarto() {
         return direccionEntrada;
     }
 
     /**
-     * Method that remove a item from the current room and if was possible return
-     * true
+     * Metodo que remueve un item por su nombre de un cuarto y si esto funciona
+     * retorna true
      *
      * @param item
      * @return
@@ -392,7 +393,7 @@ public class Juego {
     }
 
     /**
-     * Method that add a item to the current room
+     * Metodo que agrega un item a la habitación actual
      * 
      * @param elemento
      * @return
@@ -402,15 +403,12 @@ public class Juego {
     }
 
     /**
-     * Method that returns a dialog from a specific character
+     * Metodo que retorna un Dialogo aleatorio de un personaje
      * 
      * @param nombre
      * @return
      */
     public String HablarCon(String nombre) {
-        if (cuartoActual.getPersonaje(nombre).getClass() == PersonajeEnemigo.class) {
-            cuartoActual.getPersonaje(nombre);
-        }
         return cuartoActual.getDialogoPersonaje(nombre);
     }
 
@@ -432,6 +430,12 @@ public class Juego {
     public void setPersonajeEnCuartActual(Personaje personaje) {
         getCuartoActual().addPersonaje(personaje);
     }
+
+    /**
+     * Metodo que elimina un personaje del cuarto actual
+     * 
+     * @param Personaje
+     */
 
     public void removePersonaje(Personaje Personaje) {
         cuartoActual.removePersonaje(Personaje);
@@ -566,7 +570,7 @@ public class Juego {
         return existe;
     }
 
-    // Effect in the way that we write in the console
+    // Efecto en la forma de escribir en la consola
     private void textEffecto(String mensaje) {
         for (int i = 0; i <= mensaje.length(); i++) {
             try {
