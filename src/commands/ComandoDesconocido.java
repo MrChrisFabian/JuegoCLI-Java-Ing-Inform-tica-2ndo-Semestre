@@ -25,7 +25,7 @@ public class ComandoDesconocido extends ComandoAbstracto {
      * Imprime un mensaje de error
      */
     public boolean ejecutar(Juego juego) {
-        String comandoNoReconocido = (String) getPalabras().get(0);
+        String comandoNoReconocido = (String) getPalabras().get("");
         if (null != comandoNoReconocido) {
             juego.imprimir("No entiendo que quieres decir con \"" +
                            comandoNoReconocido + "\".. habla claro");

@@ -1,5 +1,7 @@
 package characters;
 
+import java.util.ArrayList;
+
 /**
  * The Personaje Class represents a Characther in the Game, that only has a name
  * and a collection of dialogues
@@ -7,7 +9,7 @@ package characters;
  */
 
 public class Personaje {
-    public Personaje(String nombre, String[] dialogos) {
+    public Personaje(String nombre, ArrayList<String> dialogos) {
         this.nombre = nombre;
         this.dialogos = dialogos;
     }
@@ -28,10 +30,14 @@ public class Personaje {
      */
 
     public String getRandomDialogo() {
-        return dialogos[(int) (Math.random() * dialogos.length)];
+        return dialogos.get((int) (Math.random() * dialogos.size()));
+    }
+
+    public void addDialog(String newDialog) {
+        dialogos.add(newDialog);
     }
 
     private final String nombre;
-    private final String[] dialogos;
+    private final ArrayList<String> dialogos;
 
 }

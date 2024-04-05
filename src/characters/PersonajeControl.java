@@ -40,13 +40,13 @@ public class PersonajeControl {
     }
 
     /**
-     * Removemos un Personaje por su nombre
+     * Removemos un Personaje
      * 
      * @param nombre
      * @return
      */
-    public boolean removePersonajeNombre(String nombre) {
-        return personajes.removeIf(p -> p.getNombre().equals(nombre));
+    public boolean removePersonaje(Personaje personaje) {
+        return personajes.removeIf(p -> p.equals(personaje));
     }
 
     /**

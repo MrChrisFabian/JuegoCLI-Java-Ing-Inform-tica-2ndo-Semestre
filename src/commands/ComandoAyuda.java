@@ -27,6 +27,7 @@ public class ComandoAyuda extends ComandoAbstracto {
      * Aqui nosotros imprimimos algo estupido, mensajes cripticos y
      * una lista de los comandos disponibles.
      */
+    @SuppressWarnings("rawtypes")
     public boolean ejecutar(Juego juego) {
         juego.imprimir("Estas en el Hotel");
         juego.imprimir("Explora...");

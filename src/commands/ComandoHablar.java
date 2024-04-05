@@ -1,5 +1,6 @@
 package commands;
 
+import characters.PersonajeEnemigo;
 import dist.Juego;
 
 public class ComandoHablar extends ComandoAbstracto {
@@ -9,7 +10,13 @@ public class ComandoHablar extends ComandoAbstracto {
             return true;
         }
         String nombre = (String) getPalabras().get("parametro");
-        juego.imprimir(juego.HablarCon(nombre));
+        if (juego.getPersonaje(nombre) == PersonajeEnemigo.class) {
+            juego.imprimir(juego.HablarCon(nombre));
+            juego.imprimir(juego.getEnemigo(nombre).Atacar());
+            juego.aumentarNivelBoss();
+        } else {
+            juego.imprimir(juego.HablarCon(nombre));
+        }
         return true;
     }
 }

@@ -12,7 +12,12 @@ package dist;
  *
  */
 
+import java.util.ArrayList;
+import java.util.List;
+
 import characters.Personaje;
+import characters.PersonajeBoss;
+import characters.PersonajeEnemigo;
 import commands.Comando;
 import commands.Parser;
 import utils.Cuarto;
@@ -56,6 +61,8 @@ public class Juego {
      */
     private void crearCuartos() {
         // crear los cuartos
+        // Cuarto vacio para mover a personajes en desuso
+        fueraDeEscena = new Cuarto("Fuera del Alcance del Jugador");
         // Patio
         Cuarto patio = new Cuarto("Patio del Overlook");
         Cuarto patioDeJuegos = new Cuarto("Patio de Juegos especial para los niños!");
@@ -176,14 +183,46 @@ public class Juego {
         pasillo217.setObjetoDelCuarto(superHeroe);
 
         // Creamos los personajes
-        Personaje halloran = new Personaje("Halloran",
-                new String[] { "Hola Doc!", "Los lugares son como las personas, algunos brillan, otros no...",
-                        "No te acerques a la habitación 217" });
+        Personaje halloran = new Personaje("Halloran", new ArrayList<String>(List.of("Hola Doc!",
+                "Algunos lugares son como las personas, algunos brillan y otros no.",
+                "Me tendre que ir Pronto... Cuidate Danny!")));
         Personaje wendy = new Personaje("Wendy",
-                new String[] { "Hola Danny, ¿Como estas?", "¿Hey Danny estas jugando con Tonny?" });
+                new ArrayList<String>(List.of("Hola Danny, ¿Como estas?", "Hey Danny trae tus juguetes por favor",
+                        "Danny Por Favor recolecta tus juguetes")));
+
+        // Creamos a los personajes enemigos
+        PersonajeEnemigo dama217 = new PersonajeEnemigo("Dama",
+                new ArrayList<String>(List.of("AaAargh!", "Niiiño!")), this,
+                "La Dama en estado de descomposición se levanto lentamente...\n te quedas paralizado de miedo \n Lo último que recuerdas son sus frías manos en tu cuello...",
+                habitaciónServicio);
+        PersonajeEnemigo leónArbusto = new PersonajeEnemigo("León-Arbusto",
+                new ArrayList<String>(List.of("RawRRRR!!!", "*Crujido de Hojas")), this,
+                "El imponente arbusto en forma de León parecia moverse, pero aunque la lógica te decia que eso no era posible empezaste a correr despavorido al oír su Rugido...",
+                habitaciónServicio);
+        PersonajeEnemigo dogman = new PersonajeEnemigo("Dogman",
+                new ArrayList<String>(List.of("Que Haces tu aqui!", "Mi Amo no tarda en venir!!!",
+                        "Vete! Solo yo puedo ser su favorito!")),
+                this,
+                "El Hombre vestido de Perro te miro con rabia y te ataco con sus garras... \n Lo último que recuerdas es su aliento fétido en tu cara...",
+                habitaciónServicio);
+        // Creamos al Jefe Final
+        Jack = new PersonajeBoss("Jack",
+                new ArrayList<String>(List.of("Hola que andas haciendo Danny?", "Te quiero hijo!")), this,
+                "Danny...Sabes que Nunca te haria Daño ni a tu mami VeRdAd?!",
+                "NO CORRAS NI HAGAS RUIDO MIENTRAS TRABAJO MALCRIADO!",
+                "El Overlook te quito a tu padre... en un arrebato de ira termino asesinandolos a todos,\n las calderas explotaron por falta de atención \n Es el final del hotel... o no",
+                habitaciónServicio, halloran, wendy);
         // Agregamos los personajes a los cuartos
+        estacionamiento.addPersonaje(halloran);
+        habitaciónServicio.addPersonaje(wendy);
+        patioDeJuegos.addPersonaje(leónArbusto);
+        baño217.addPersonaje(dama217);
+        DogmanCuarto.addPersonaje(dogman);
+        salon.addPersonaje(Jack);
+
         // Establecemos donde inicia el juego
         cuartoActual = patio;
+
     }
 
     /**
@@ -192,12 +231,13 @@ public class Juego {
     public void jugar() {
         imprimir();
         imprimirBienvenida();
+        Jack.comportamiento();
 
         // Jugar hasta que un comando me diga que ya no quiere jugar mas
         boolean continuar = true;
         while (continuar) {
             Comando comando = parser.getComando();
-            continuar = comando.ejecutar(this);
+            continuar = (getContinuePorNivel() && comando.ejecutar(this));
         }
         imprimir("Gracias Por Jugar...El Overlook siempre lo espera...");
     }
@@ -241,9 +281,21 @@ public class Juego {
             System.out.println(
                     "Eeeem... no puedo ir para allí... algo me esta bloqueando.");
         } else {
-            cuartoActual = siguienteCuarto;
-            System.out.println(cuartoActual.descripcionLarga());
+            // Si el Boss tiene el nivel necesario nos seguira.
+            if (getContinuePorNivel() == true) {
+                cuartoActual.removePersonaje(Jack);
+                cuartoActual = siguienteCuarto;
+                if (cuartoActual.getPersonaje(Jack.getNombre()) == null) {
+                    cuartoActual.addPersonaje(Jack);
+                }
+                imprimir(cuartoActual.descripcionLarga());
+            } else {
+                cuartoActual = siguienteCuarto;
+                imprimir(cuartoActual.descripcionLarga());
+            }
         }
+        comportamientoBoss();
+
     }
 
     /**
@@ -322,18 +374,6 @@ public class Juego {
         return jugador.getItem(item);
     }
 
-    // Effect in the way that we write in the console
-    private void textEffecto(String mensaje) {
-        for (int i = 0; i <= mensaje.length(); i++) {
-            try {
-                Thread.sleep(10);
-                System.out.print(mensaje.charAt(i));
-            } catch (Exception e) {
-
-            }
-        }
-    }
-
     /**
      * Method that returns the value of the last room
      */
@@ -369,11 +409,106 @@ public class Juego {
      * @return
      */
     public String HablarCon(String nombre) {
+        if (cuartoActual.getPersonaje(nombre).getClass() == PersonajeEnemigo.class) {
+            cuartoActual.getPersonaje(nombre);
+        }
         return cuartoActual.getDialogoPersonaje(nombre);
     }
 
+    /**
+     * Retornamos el espacio del inventario del jugador
+     * 
+     * @return
+     */
+
     public int getEspacioInventarioJugador() {
         return jugador.getEspacio();
+    }
+
+    /**
+     * Metodo que nos sirve para mover un Personaje de forma automática
+     * 
+     * @param cuarto
+     */
+    public void setPersonajeEnCuartActual(Personaje personaje) {
+        getCuartoActual().addPersonaje(personaje);
+    }
+
+    public void removePersonaje(Personaje Personaje) {
+        cuartoActual.removePersonaje(Personaje);
+    }
+
+    /**
+     * Metodo que establece la Habitación Actual
+     * 
+     * @param cuarto
+     */
+
+    public void setHabitacionActual(Cuarto cuarto) {
+        cuartoActual = cuarto;
+    }
+
+    /**
+     * Metodo que establece un personaje fuera de la escena
+     * 
+     * @param personaje
+     */
+    public void setPersonajeFueraDeEscena(Personaje personaje) {
+        fueraDeEscena.addPersonaje(personaje);
+    }
+
+    /**
+     * Metodo que agregar dialogos a un personaje
+     * 
+     * @param elemento
+     * @return
+     */
+    public void addDialogPersonaje(Personaje personaje, String elemento) {
+        personaje.addDialog(elemento);
+    }
+
+    /**
+     * Metodo que devuelve un Personaje por su nombre
+     * 
+     * @param elemento
+     * @return
+     */
+    public Class<?> getPersonaje(String elemento) {
+        return cuartoActual.getPersonaje(elemento).getClass();
+    }
+
+    /**
+     * Una vez que nos aseguramos de tener un Personaje enemigo podemos obtenerlo
+     * 
+     * @param elemento
+     * @return
+     */
+    public PersonajeEnemigo getEnemigo(String elemento) {
+        return (PersonajeEnemigo) cuartoActual.getPersonaje(elemento);
+    }
+
+    /**
+     * Metodo que aumenta el nivel del Jefe final del juego
+     */
+    public void aumentarNivelBoss() {
+        Jack.incrementarNivel();
+    }
+
+    /**
+     * Metodo que activa el comportamiento del Boss
+     */
+
+    public void comportamientoBoss() {
+        Jack.comportamiento();
+    }
+
+    /**
+     * Metodo que retorna si continuar según el nivel del boss
+     * 
+     * @return
+     */
+    public boolean getContinuePorNivel() {
+        return Jack.getNivel() == 4 ? false : true;
     }
 
     /**
@@ -392,7 +527,22 @@ public class Juego {
         return existe;
     }
 
+    // Effect in the way that we write in the console
+    private void textEffecto(String mensaje) {
+        for (int i = 0; i <= mensaje.length(); i++) {
+            try {
+                Thread.sleep(10);
+                System.out.print(mensaje.charAt(i));
+            } catch (Exception e) {
+
+            }
+        }
+    }
+
     // Objeto donde Guardamos las direcciones
     private TipoSalida direccionEntrada;
-
+    // Cuarto para mover personajes en desuso
+    private Cuarto fueraDeEscena;
+    // Personaje Jefe final del juego
+    private PersonajeBoss Jack;
 }

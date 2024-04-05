@@ -46,6 +46,7 @@ public interface Comando {
      * Retorna las palabras utilizadas en el comando. Ej:
      * HashMap con "ir" y "norte"
      */
+    @SuppressWarnings("rawtypes")
     public HashMap getPalabras();
 
     /**

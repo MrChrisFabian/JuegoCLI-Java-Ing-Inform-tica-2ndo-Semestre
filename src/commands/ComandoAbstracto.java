@@ -21,7 +21,7 @@ import java.util.*;
  */
 public abstract class ComandoAbstracto implements Comando, Cloneable {
 
-    private HashMap palabras = new HashMap<String, String>();
+    private HashMap<String, String> palabras = new HashMap<String, String>();
 
     /**
      * Le dice al comando cuales son las palabras del comando.

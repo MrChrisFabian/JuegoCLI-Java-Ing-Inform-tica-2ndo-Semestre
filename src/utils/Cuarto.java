@@ -157,10 +157,29 @@ public class Cuarto {
     }
 
     /**
+     * Removemos un personaje del cuarto
+     * 
+     * @param personaje
+     */
+    public void removePersonaje(Personaje personaje) {
+        personajeControl.removePersonaje(personaje);
+    }
+
+    /**
      * Method that return a personaje Dialog by his name
      */
     public String getDialogoPersonaje(String nombre) {
         return personajeControl.getPersonaje(nombre).getRandomDialogo();
+    }
+
+    /**
+     * Metodo que retorna un personaje por su nombre
+     * 
+     * @param nombre
+     * @return
+     */
+    public Personaje getPersonaje(String nombre) {
+        return personajeControl.getPersonaje(nombre);
     }
 
     // la descripcion del cuarto

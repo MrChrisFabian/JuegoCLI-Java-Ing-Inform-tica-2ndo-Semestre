@@ -30,6 +30,7 @@ public class FabricaDeComandos {
     /**
      * Constructor - inicializa los comandos.
      */
+    @SuppressWarnings("unchecked")
     public FabricaDeComandos() {
         // Para agregar un comando nuevo
         // tienes que:
@@ -98,6 +99,7 @@ public class FabricaDeComandos {
      * @return un objeto de tipo List que con la lista
      *         de nombres de comandos conocidos
      */
+    @SuppressWarnings("rawtypes")
     public Collection comandosConocidos() {
         return this.comandosConocidos.keySet();
     }
@@ -114,6 +116,7 @@ public class FabricaDeComandos {
     private static final String MIRAR = "mirar";
     private static final String HABLAR = "hablar";
     // aqui pondremos los comandos que conocemos
+    @SuppressWarnings("rawtypes")
     private final Map comandosConocidos = new HashMap();
 }
 // Obtiene lo que le pasa el parse y controla si el primer elemento es uno de
