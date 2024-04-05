@@ -1,4 +1,5 @@
 package utils;
+
 /**
  * Creado para evitar errores en el seteo de Salidas
  */

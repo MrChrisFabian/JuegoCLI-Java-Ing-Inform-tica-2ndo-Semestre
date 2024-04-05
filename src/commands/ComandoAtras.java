@@ -2,6 +2,7 @@ package commands;
 
 import dist.Juego;
 import utils.TipoSalida;
+
 /**
  * Atras, nos dirijimos a la dirección para salir del cuarto actual
  */
@@ -10,26 +11,26 @@ public class ComandoAtras extends ComandoAbstracto {
         // Buscar la direccion que coincida con getUltimoCuarto
         TipoSalida direccion = juego.getUltimoCuarto();
         switch (direccion) {
-            case TipoSalida.NORTE:
+            case NORTE:
                 juego.irA("SUR");
                 break;
-            case TipoSalida.SUR:
+            case SUR:
                 juego.irA("NORTE");
 
                 break;
-            case TipoSalida.ESTE:
+            case ESTE:
                 juego.irA("OESTE");
 
                 break;
-            case TipoSalida.OESTE:
+            case OESTE:
                 juego.irA("ESTE");
 
                 break;
-            case TipoSalida.ARRIBA:
+            case ARRIBA:
                 juego.irA("ABAJO");
 
                 break;
-            case TipoSalida.ABAJO:
+            case ABAJO:
                 juego.irA("ARRIBA");
                 break;
         }
