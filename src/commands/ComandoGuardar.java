@@ -13,6 +13,10 @@ public class ComandoGuardar extends ComandoAbstracto {
         if (check) {
             juego.removerItemCuarto(itemName);
             juego.imprimir("Has guardado el item: " + itemName + " en tu inventario");
+            if (juego.getCuartoActual().descripcionCorta().equals("Las habitaciones de la Familia Torrance")
+                    && juego.getCuartoActual().getObjetoDelCuarto(itemName).esJuguete()) {
+                juego.menosJugueteEnCuarto();
+            }
         } else {
             juego.imprimir("No tienes espacio suficiente en tu inventario");
         }

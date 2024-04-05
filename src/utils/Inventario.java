@@ -30,7 +30,7 @@ public class Inventario {
      */
     public boolean removerElemento(String nombre) {
         boolean completado = false;
-        Item itemEliminarAux = new Item("Handler", 0);
+        Item itemEliminarAux = new Item("Handler", 0, false);
         if (getItem(nombre) != null) {
             pesoActual -= getItem(nombre).getPeso();
             completado = true;

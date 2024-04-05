@@ -147,20 +147,20 @@ public class Juego {
         // calderas
         calderas.setSalidas(TipoSalida.NORTE, pasilloSS);
         // Creamos los objetos
-        Item hacha = new Item("Hacha-de-Incendios", 50);
-        Item palo = new Item("Palo-de-Cricket", 20);
-        Item maleta = new Item("Maleta-perdida", 20);
-        Item maqEscribir = new Item("Maquina-de-Escribir", 20);
+        Item hacha = new Item("Hacha-de-Incendios", 50, false);
+        Item palo = new Item("Palo-de-Cricket", 20, false);
+        Item maleta = new Item("Maleta-perdida", 20, false);
+        Item maqEscribir = new Item("Maquina-de-Escribir", 20, false);
 
         // Juguetes de Danny
-        Item Triciclo = new Item("Triciclo", 9);
-        Item pelota = new Item("Pelota", 2);
-        Item superHeroe = new Item("Juegute-de-Batman", 2);
-        Item yoyo = new Item("Yoyo", 1);
-        Item autito = new Item("Autito", 3);
+        Item Triciclo = new Item("Triciclo", 9, true);
+        Item pelota = new Item("Pelota", 2, true);
+        Item superHeroe = new Item("Juegute-de-Batman", 2, true);
+        Item yoyo = new Item("Yoyo", 1, true);
+        Item autito = new Item("Autito", 3, true);
         // Comida
-        Item Gintonic = new Item("Gintonic", 1);
-        Item Flan = new Item("Flan", 1);
+        Item Gintonic = new Item("Gintonic", 1, false);
+        Item Flan = new Item("Flan", 1, false);
 
         // Agregamos los Objetos a los cuartos
         estacionamiento.setObjetoDelCuarto(autito);
@@ -231,11 +231,11 @@ public class Juego {
     public void jugar() {
         imprimir();
         imprimirBienvenida();
-        Jack.comportamiento();
 
         // Jugar hasta que un comando me diga que ya no quiere jugar mas
         boolean continuar = true;
         while (continuar) {
+            Jack.comportamiento();
             Comando comando = parser.getComando();
             continuar = (getContinuePorNivel() && comando.ejecutar(this));
         }
@@ -512,6 +512,36 @@ public class Juego {
     }
 
     /**
+     * Retornamos la cantidad de juguetes que se almacenan en el cuarto objetivo
+     * para ganar
+     * 
+     * @return
+     */
+    public int juguetesEnCuarto() {
+        return cantJuguetes;
+    }
+
+    /**
+     * Disminuimos la cantidad de juguetes en el cuarto objetivo
+     * 
+     * @return
+     */
+    public int menosJugueteEnCuarto() {
+        cantJuguetes--;
+        return cantJuguetes;
+    }
+
+    /**
+     * Aumentamos la cantidad de juguetes en el cuarto objetivo
+     * 
+     * @return
+     */
+    public int aumentarJugueteEnCuarto() {
+        cantJuguetes++;
+        return cantJuguetes;
+    }
+
+    /**
      * Metodo que devuelve si existe en el enum TipoSalida
      * 
      * @param elemento
@@ -545,4 +575,6 @@ public class Juego {
     private Cuarto fueraDeEscena;
     // Personaje Jefe final del juego
     private PersonajeBoss Jack;
+    // Cantidad de juguetes en la habitación objetivo
+    private int cantJuguetes;
 }

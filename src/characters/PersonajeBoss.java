@@ -60,5 +60,5 @@ public class PersonajeBoss extends PersonajeEnemigo {
     private String MensajeNivel3;
     private Personaje personajeBueno;
     private Personaje personajeBueno1;
-    private int nivel = 2;
+    private int nivel = 0;
 }
