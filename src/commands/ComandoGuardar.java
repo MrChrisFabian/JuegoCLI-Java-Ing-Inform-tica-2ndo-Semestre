@@ -13,11 +13,16 @@ public class ComandoGuardar extends ComandoAbstracto {
             return true;
         }
         String itemName = (String) getPalabras().get("parametro");
+        if (juego.getCuartoActual().getObjetoDelCuarto(itemName) == null) {
+            juego.imprimir("No existe el item: " + itemName + " en el cuarto");
+            return true;
+        }
         boolean check = juego.agregarItemJugador(itemName);
         if (check) {
             juego.removerItemCuarto(itemName);
             juego.imprimir("Has guardado el item: " + itemName + " en tu inventario");
-            // En caso de guardar un juguete de la habitación objetivo se disminuye la cantidad de juguetes 
+            // En caso de guardar un juguete de la habitación objetivo se disminuye la
+            // cantidad de juguetes
             if (juego.getCuartoActual().descripcionCorta().equals("Las habitaciones de la Familia Torrance")
                     && juego.getCuartoActual().getObjetoDelCuarto(itemName).esJuguete()) {
                 juego.menosJugueteEnCuarto();

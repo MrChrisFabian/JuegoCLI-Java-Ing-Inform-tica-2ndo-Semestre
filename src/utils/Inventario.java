@@ -48,7 +48,7 @@ public class Inventario {
      * @return
      */
     public boolean AddElement(Item objeto) {
-        if (checkEspacio(objeto)) {
+        if (checkEspacio(objeto) && objeto != null) {
             inventario.add(objeto);
             pesoActual += objeto.getPeso();
             return true;
